@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: VerifyCEVersionID
+Bundle-SymbolicName: com.polarion.verifyCEVersionID
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: com.polarion.alm.tracker;bundle-version="3.22.2"
+Bundle-Vendor: POLARION
+Automatic-Module-Name: com.polarion.verifyCEVersionID
+Bundle-ClassPath: verifyCEVersionID.jar
+Bundle-RequiredExecutionEnvironment: JavaSE-11
