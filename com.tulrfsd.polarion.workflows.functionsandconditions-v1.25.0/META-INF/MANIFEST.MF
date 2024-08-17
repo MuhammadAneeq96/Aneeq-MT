@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Workflow Functions and Conditions
+Bundle-SymbolicName: com.tulrfsd.polarion.workflows.functionsandconditions
+Bundle-Version: 1.25.0
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-Vendor: Institute of Flight System Dynamics - Technical University of Munich
+Require-Bundle: com.polarion.alm.tracker;bundle-version="3.23.10",
+ com.polarion.platform.persistence;bundle-version="3.23.10",
+ com.polarion.alm.ui;bundle-version="3.23.10",
+ com.tulrfsd.polarion.core;bundle-version="0.11.0"
+Export-Package: com.tulrfsd.polarion.workflows.impl
+
+

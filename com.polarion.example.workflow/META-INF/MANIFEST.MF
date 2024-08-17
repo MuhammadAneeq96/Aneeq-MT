@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Workflow Example Plug-in
+Bundle-SymbolicName: com.polarion.example.workflow
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-Vendor: Polarion Software
+Require-Bundle: com.polarion.alm.tracker
+Bundle-ClassPath: example-workflow.jar
+
+

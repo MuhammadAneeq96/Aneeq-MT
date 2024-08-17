@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="com.tulrfsd.polarion.workflows.functionsandconditions" version="1.0.0">
+	<contribution configuration-id="com.polarion.alm.tracker.workflow.functions">
+		<function name="tulrfsd_CreateProjectBaseline" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.functions.CreateProjectBaseline"/>
+		<function name="tulrfsd_ExecuteReferencedObjectWorkflowAction" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.functions.ExecuteReferencedObjectWorkflowAction"/>
+		<function name="tulrfsd_ExecuteReferencingObjectWorkflowAction" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.functions.ExecuteReferencingObjectWorkflowAction"/>
+		<function name="tulrfsd_ResetFieldValue" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.functions.ResetFieldValue"/>
+		<function name="tulrfsd_SetEnumOptions" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.functions.SetEnumOptions"/>
+		<function name="tulrfsd_SetRevisionOfWorkflowObjectHyperlinks" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.functions.SetRevisionOfWorkflowObjectHyperlinks"/>
+		<function name="tulrfsd_StoreRevisionOfWorkflowObjectFromField" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.functions.StoreRevisionOfWorkflowObjectFromField"/>
+		<function name="tulrfsd_ExecuteLinkedWorkItemsAction" prototype="WorkItem" clazz="com.tulrfsd.polarion.workflows.workitems.functions.ExecuteLinkedWorkItemsAction"/>
+		<function name="tulrfsd_SetLinkedWorkItemsRevision" prototype="WorkItem" clazz="com.tulrfsd.polarion.workflows.workitems.functions.SetLinkedWorkItemsRevision"/>
+		<function name="tulrfsd_UpdateSuspectFlag" prototype="WorkItem" clazz="com.tulrfsd.polarion.workflows.workitems.functions.UpdateSuspectFlag"/>
+		<function name="tulrfsd_AddEnumOptionsFromWorkItems" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.functions.AddEnumOptionsFromWorkItems"/>
+		<function name="tulrfsd_EmptyRecycleBin" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.functions.EmptyRecycleBin"/>
+		<function name="tulrfsd_UpdateReferencedWorkItems" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.functions.UpdateReferencedWorkItems"/>
+		<function name="tulrfsd_UpdateTitleWorkItemWithDocumentTitle" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.functions.UpdateTitleWorkItemWithDocumentTitle"/>
+		<function name="tulrfsd_AddTestCasesFromCollection" prototype="TestRun" clazz="com.tulrfsd.polarion.workflows.testruns.functions.AddTestCasesFromCollection"/>
+	</contribution>
+	<contribution configuration-id="com.polarion.alm.tracker.workflow.conditions">
+		<condition name="tulrfsd_AllUsersSelectedInFieldSigned" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.AllUsersSelectedInFieldSigned"/>
+		<condition name="tulrfsd_CheckDateField" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.CheckDateField"/>
+		<condition name="tulrfsd_CheckFieldRegEx" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.CheckFieldRegEx"/>
+		<condition name="tulrfsd_CheckForExistingWorkflowSignature" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.CheckForExistingWorkflowSignature"/>
+		<condition name="tulrfsd_CheckForObjectsWithEqualFieldValues" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.CheckForObjectsWithEqualFieldValues"/>
+		<condition name="tulrfsd_CurrentUserSelectedInField" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.CurrentUserSelectedInField"/>
+		<condition name="tulrfsd_ReferencedObjectMatchesQuery" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.ReferencedObjectMatchesQuery"/>
+		<condition name="tulrfsd_ReferencingObjectMatchesQuery" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.ReferencingObjectMatchesQuery"/>
+		<condition name="tulrfsd_StatusAvailableForReferencingObject" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.StatusAvailableForReferencingObject"/>
+		<condition name="tulrfsd_UserSelectedInFieldHasRole" prototype="*" clazz="com.tulrfsd.polarion.workflows.generic.conditions.UserSelectedInFieldHasRole"/>
+		<condition name="tulrfsd_ContainedInDocument" prototype="WorkItem" clazz="com.tulrfsd.polarion.workflows.workitems.conditions.ContainedInDocument"/>
+		<condition name="tulrfsd_LinkedWorkItems" prototype="WorkItem" clazz="com.tulrfsd.polarion.workflows.workitems.conditions.LinkedWorkItems"/>
+		<condition name="tulrfsd_AllUsersSelectedInFieldApproved" prototype="WorkItem" clazz="com.tulrfsd.polarion.workflows.workitems.conditions.AllUsersSelectedInFieldApproved"/>
+		<condition name="tulrfsd_ContainsMatchingWorkItems" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.conditions.ContainsMatchingWorkItems"/>
+		<condition name="tulrfsd_ContainsString" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.conditions.ContainsString"/>
+		<condition name="tulrfsd_RecycleBinIsEmpty" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.conditions.RecycleBinIsEmpty"/>
+		<condition name="tulrfsd_TestCasesHaveTestRecords" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.conditions.TestCasesHaveTestRecords"/>
+		<condition name="tulrfsd_WorkItemsHaveLinkedWorkItems" prototype="Module" clazz="com.tulrfsd.polarion.workflows.documents.conditions.WorkItemsHaveLinkedWorkItems"/>
+		<condition name="tulrfsd_AllTestRecordsExecuted" prototype="TestRun" clazz="com.tulrfsd.polarion.workflows.testruns.conditions.AllTestRecordsExecuted"/>
+	</contribution>
+</module>
