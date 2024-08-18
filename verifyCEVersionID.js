@@ -1,4 +1,4 @@
-
+//  First commit by salman
 
 // Create a log file for debugging the code
 var FileWriter = Java.type('java.io.FileWriter'); 
