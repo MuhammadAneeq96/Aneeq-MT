@@ -16,45 +16,64 @@ import com.polarion.alm.tracker.workflow.IArguments;
 import com.polarion.alm.tracker.workflow.ICallContext;
 import com.polarion.alm.tracker.workflow.IWorkflowCondition;
 import com.polarion.platform.security.PermissionDeniedException;
-/*import com.tulrfsd.polarion.core.model.ICustomWorkflowCondition;
-import com.tulrfsd.polarion.workflows.utils.Literals;*/
+import com.tulrfsd.polarion.core.model.ICustomWorkflowCondition;
+//import com.tulrfsd.polarion.workflows.utils.Literals;
 import java.util.Set;
+import java.util.List;
 
 
-public class VerifyCEVersionID implements IWorkflowCondition<IWorkItem> {
+public class VerifyCEVersionID implements ICustomWorkflowCondition<IWorkItem> {
 	
-	/*static final String CONDITION_NAME = Literals.WORKFLOW_PREFIX.getValue() + VerifyCEVersionID.class.getSimpleName();*/
+	//static final String CONDITION_NAME = Literals.WORKFLOW_PREFIX.getValue() + VerifyCEVersionID.class.getSimpleName();
 
-	Set<String> linkedWorkItemtypeID;
-	Set<String> linkedWorkItemID;
-	IWorkItem currentWorkItem;
+	IWorkItem currentWorkItem; // gets the current work item (CE)
+	Set<String> currentWorkItemID; // variable for storing the polarion ID of the current work item (CE)
+	Set<String> currentWorkItemVersionID; // variable for storing the value of the field 'Version' of the current work item (CE)
+	Set<String> linkedWorkItemtypeID; // variable for storing the type ID of linked work item types to the current work item (CE)
+	// Set<String> linkedTestCaseWorkItemtypeID; // variable for storing the type ID of linked work item types to the current work item (CE)
+	List<ILinkedWorkItemStruct> linkedTestCases;
+	Set<String> linkedWorkItemID; // variable for storing the ID of all linked work item types to the current work item (CE)
+	IWorkItem retrievedWorkItem;
 	IModule retrievedCD;
-	boolean allTestsPassed = true;
-	boolean ceVersionMatch = true;
+	boolean allTestsPassed;
+	boolean ceVersionMatch;
 	
-	public void execute(ICallContext<IWorkItem> context, IArguments arguments) {
+	//public void execute(ICallContext<IWorkItem> context, IArguments arguments) {
+	@Override
+	public String checkCondition(ICallContext<IWorkItem> context) {
 	    IWorkItem currentWorkItem = context.getTarget();
 	    String currentWorkItemID = currentWorkItem.getId();
 	    Object currentWorkItemVersionID = currentWorkItem.getCustomField('ceVersion');
+	    allTestsPassed = true;
+		ceVersionMatch = true;
+		
 	    // Object currentWorkItemVersionID = currentWorkItem.getValue('ceversion');
 	    
 	    currentWorkItem = context.getTarget();
-	    module = workItem.getModule();
 	    
-	checkLinkedTestCaseResults(currentWorkItem);
-	check
+	    
+	    return false;
 	}
-
-	@Override
-	public boolean passesCondition(ICallContext<IWorkItem> arg0, IArguments arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
+	
+	 private boolean checkAllTestsPassed() {
+	
+		 // Use allTestsPassed here in the condition
+		 	 
+	 }
+	 
+	 private boolean checkCEVersionMatch() {
+		 
+ 		 // module = workItem.getModule();
+		 // Use ceVersionMatch here in the condition
+	 }
+	
+	
+	//checkLinkedTestCaseResults(currentWorkItem);
+		
+	/*@Override
 	public String passesConditionWithFailureMessage(ICallContext<IWorkItem> arg0, IArguments arg1) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 }
