@@ -13,6 +13,7 @@ import com.polarion.alm.tracker.model.IModule;
 import com.polarion.alm.tracker.model.ILinkedWorkItemStruct;
 import com.polarion.alm.tracker.model.IWorkItem;
 import com.polarion.alm.tracker.model.IWorkflowObject;
+import com.polarion.alm.shared.api.model.wi.testcase;
 import com.polarion.alm.tracker.workflow.IArguments;
 import com.polarion.alm.tracker.workflow.ICallContext;
 import com.polarion.alm.tracker.workflow.IWorkflowCondition;
@@ -49,26 +50,30 @@ public class VerifyCEVersionID implements ICustomWorkflowCondition<IWorkItem> {
 	    allTestsPassed = true;
 		ceVersionMatch = true;
 		
-        checkAllTestsPassed();
-        // condition2();
+		if (allTestsPassed && ceVersionMatch) {
+			checkCondition = true;  // Set conditionCheck to true if both conditions are true
+		}
+		
+		checkAllTestsPassed();
+		checkCEVersionMatch();
 			    
 	    //return false;
 	}
 	
-	 private boolean checkAllTestsPassed() {	 
+	 private String checkAllTestsPassed() {	 
     	 List<ILinkedWorkItemStruct> linkedWorkItemsStructs = currentWorkItem.getLinkedWorkItemsStructBack();
     	 List<IWorkItem> linkedTestCases = linkedWorkItemsStructs.stream()
-    	            .filter(linkedWorkItemStruct -> "tested_by".equals(linkedWorkItemStruct.getLinkRole().getId()))
+    	            .filter(linkedWorkItemStruct -> "tests".equals(linkedWorkItemStruct.getLinkRole().getId()))
     	            .map(ILinkedWorkItemStruct::getLinkedItem)  // Map to the linked work item
     	            .collect(Collectors.toList());  // Collect to a list
     	 
     	        //return linkedTestCases;
     	        
     	        for (IWorkItem testCase : linkedTestCases) {
-    	            Optional<TestRecord> mostRecentTestRecord = getMostRecentTestRecord(testCase);
+    	            Optional<TestRecord> mostRecentTestRecord = getMostRecentTestRecord(<IWorkItem> testCase);
 
     	            if (mostRecentTestRecord.isPresent()) {
-    	                String testRecordStatus = mostRecentTestRecord.get().getCustomField(TestRecordFields.STATUS);
+    	                String testRecordStatus = mostRecentTestRecord.get().getCustomField(TestRecord).getValue(); // not sure about this line
 
     	                // Check if the status is not 'passed'
     	                if (!"passed".equalsIgnoreCase(testRecordStatus)) {
@@ -77,39 +82,59 @@ public class VerifyCEVersionID implements ICustomWorkflowCondition<IWorkItem> {
     	                }
     	            } else {
     	                // If there is no test record, consider it as a failed condition
-    	                allTestsPassed = false;
+    	                allTestsPassed = true;
     	                break;
     	            }
     	        }
     	    }
 		 
-	 private Optional<TestRecord> getMostRecentTestRecord(IWorkItem testCase) {
+	 private Optional<TestRecord> getMostRecentTestRecord(<IWorkItem> testCase) {
 	        // Assuming testCase.getLinkedWorkItemsStructDirect() gives you the linked test records
-	        List<TestRecord> testRecords = testCase.getLinkedWorkItemsStructsDirect().stream()
+	        List<TestRecord> testRecords = testCase.result().stream() // Doesn't seem correct way to get the test record of a test case
 	                .filter(linkedWorkItemStruct -> linkedWorkItemStruct.getLinkedItem() instanceof TestRecord)
 	                .map(linkedWorkItemStruct -> (TestRecord) linkedWorkItemStruct.getLinkedItem())
 	                .collect(Collectors.toList());
 
 	        // Get the most recent test record based on the created date
-	        return testRecords.stream()
+	        return testRecords.stream() 												// not sure about this code block either
 	                .max((record1, record2) -> {
-	                    String created1 = record1.getCustomField(TestRecordFields.CREATED);
-	                    String created2 = record2.getCustomField(TestRecordFields.CREATED);
+	                    String created1 = record1.getCustomField(created).getValue();
+	                    String created2 = record2.getCustomField(created).getValue();
 	                    return created1.compareTo(created2);
 	                });
 	    }
-	
-		 // Use allTestsPassed here in the condition
-		 // checkAllTestsPassed = false;
 		 	 
-	 private boolean checkCEVersionMatch() {
-		 //if...
+	 private String checkCEVersionMatch() {
+		// Function to retrieve the value of the custom field 'configDocRevNum' from the test run
+		    public String getConfigDocRevNumFromTestRun(IWorkItem testCase) {
+		        ITestRecord mostRecentTestRecord = getMostRecentTestRecord(testCase);
+		        
+		        if (mostRecentTestRecord == null) {
+		            return null;  // No test records found
+		        }
+
+		        // Get the test run associated with the most recent test record
+		        ITestRun testRun = mostRecentTestRecord.getTestRun();
+
+		        if (testRun == null) {
+		            return null;  // No test run found
+		        }
+
+		        try {
+		            // Retrieve the value of the custom field 'configDocRevNum'
+		            return testRun.getCustomField("configDocRevNum");
+		        } catch (CustomFieldNotFoundException e) {
+		            e.printStackTrace();
+		            return null;  // Handle the case where the custom field is not found
+		        }
+		    }
+		}
 
  		 // module = workItem.getModule();
 		 // Use ceVersionMatch here in the condition
 		 checkAllTestsPassed = false;
 	 }
-	
+	 
 	
 	//checkLinkedTestCaseResults(currentWorkItem);
 		
